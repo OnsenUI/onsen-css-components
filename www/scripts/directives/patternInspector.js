@@ -18,23 +18,8 @@ angular.module('app').directive('patternInspector', function($rootScope, Generat
     var mask = $(element[0]);
     var highlight = $('.inspector-highlight', element[0]);
     var label = $('.label', highlight[0]);
-    var iframe;
+    var pattern = $('div.pattern-preview', mask.parent());
     var lastComponent = null;
-
-    function relativePosition(x, y) {
-      var rect = mask[0].getBoundingClientRect();
-      return {
-        x: Math.max(0, x - rect.left),
-        y: Math.max(0, y - rect.top)
-      };
-    }
-
-    function getIframe() {
-      if (!iframe) {
-       iframe = $('iframe', mask.parent());
-      }
-      return iframe;
-    }
 
     function searchTopcoatComponent(target) {
       if (target) {
@@ -44,7 +29,10 @@ angular.module('app').directive('patternInspector', function($rootScope, Generat
         if (possibleComponents.length > 0) {
           // TODO: check hint property for more accurate check
           var foundComponent = possibleComponents[0];
-          return { object: foundComponent, element: target };
+          return {
+            object: foundComponent,
+            element: target
+          };
         } else {
           return searchTopcoatComponent(target.parentNode);
         }
@@ -52,46 +40,50 @@ angular.module('app').directive('patternInspector', function($rootScope, Generat
       return null;
     }
 
-    mask.mousemove(watch);
-    highlight.mousemove(watch);
-
-    mask.mouseleave(function() {
+    mask.parent().mousemove(watch);
+    mask.parent().mouseleave(function() {
       highlight.hide();
     });
 
-
     function watch(event) {
-      var point = relativePosition(event.clientX, event.clientY);
-      var targetElement = getIframe()[0].contentDocument.elementFromPoint(point.x, point.y);
+      var point = {x: event.clientX, y: event.clientY};
+
+      mask.css('pointer-events', 'none');
+      var targetElement = document.elementFromPoint(point.x, point.y);
+      mask.css('pointer-events', 'auto');
+
       var component = searchTopcoatComponent(targetElement);
 
       if (component) {
         var rect = component.element.getBoundingClientRect();
+        var base = pattern[0].getBoundingClientRect();
 
         highlight.css({
-          left: rect.left,
-          top: rect.top,
+          left: rect.left - base.left,
+          top: rect.top - base.top,
           width: rect.width,
           height: rect.height
         }).show();
 
         label
           .removeClass('above below')
-          .addClass(rect.top > 20 ? 'above' : 'below')
+          .addClass(rect.top - base.top > 20 ? 'above' : 'below')
           .text(component.object.name);
 
         lastComponent = component;
       } else {
         lastComponent = null;
-        rect = getIframe()[0].contentDocument.body.getBoundingClientRect();
+        var rect = pattern[0].getBoundingClientRect();
+        var base = pattern[0].getBoundingClientRect();
+
         label
           .removeClass('above below')
           .addClass('inner')
           .text("Full Source");
 
         highlight.css({
-          left: rect.left,
-          top: rect.top,
+          left: rect.left - base.left,
+          top: rect.top - base.top,
           width: rect.width,
           height: rect.height
         }).show();

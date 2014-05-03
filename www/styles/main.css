@@ -250,49 +250,6 @@ div#content-container {
   -webkit-transform: translateX(-4px) rotate(-135deg);
   transform: translateX(-4px) rotate(-135deg);
 }
-.inspector-mask {
-  position: absolute;
-  background-color: transparent;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  z-index: 90;
-  overflow: hidden;
-}
-.inspector-mask .inspector-highlight {
-  position: absolute;
-  background-color: rgba(255, 0, 0, 0.2);
-  border: 1px solid #ff1a33;
-  z-index: 2001;
-  display: none;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-.inspector-mask .inspector-highlight > div.label {
-  position: absolute;
-  display: inline-block;
-  font-size: 12px;
-  width: auto;
-  left: -1px;
-  height: 20px;
-  color: white;
-  background-color: #ff1a33;
-  font-weight: bold;
-  line-height: 20px;
-  padding: 0 4px;
-  white-space: nowrap;
-}
-.inspector-mask .inspector-highlight > div.label.inner {
-  bottom: 0px;
-  right: 0px;
-}
-.inspector-mask .inspector-highlight > div.label.above {
-  top: -20px;
-}
-.inspector-mask .inspector-highlight > div.label.below {
-  bottom: -20px;
-}
 #___plusone_0 {
   width: 71px !important;
 }
@@ -671,6 +628,7 @@ div#overview-container > ul#overview > li {
   padding: 0;
   list-style: none;
   display: inline-block;
+  font-size: 16px;
 }
 div#overview-container > ul#overview > li > h3 {
   font-size: 18px;
@@ -690,28 +648,81 @@ div#overview-container > ul#overview > li > div.pattern > div.pattern-mask {
   right: 0px;
   bottom: 0px;
   background-color: #343536;
-  z-index: 9;
+  z-index: 8;
 }
-div#overview-container > ul#overview > li > div.pattern > div.inspector-mask.inspecting {
+div#overview-container > ul#overview > li > div.pattern .inspector-mask {
+  cursor: pointer;
+  z-index: 9;
+  position: absolute;
+  background-color: transparent;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+div#overview-container > ul#overview > li > div.pattern .inspector-mask.inspecting {
   -webkit-transform: translateY(-24px);
   transform: translateY(-24px);
 }
-div#overview-container > ul#overview > li > div.pattern > iframe {
-  position: relative;
+div#overview-container > ul#overview > li > div.pattern .inspector-mask .inspector-highlight {
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0.2);
+  border: 1px solid #ff1a33;
+  z-index: 9;
+  display: none;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+div#overview-container > ul#overview > li > div.pattern .inspector-mask .inspector-highlight > div.label {
+  position: absolute;
+  display: inline-block;
+  font-size: 12px;
+  width: auto;
+  left: -1px;
+  right: -1px;
+  height: 20px;
+  color: white;
+  border: 1px solid #ff1a33;
+  background-color: #ff1a33;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 0 4px;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+div#overview-container > ul#overview > li > div.pattern .inspector-mask .inspector-highlight > div.label.inner {
+  bottom: 0px;
+  right: -1px;
+}
+div#overview-container > ul#overview > li > div.pattern .inspector-mask .inspector-highlight > div.label.above {
+  top: -20px;
+  right: -1px;
+}
+div#overview-container > ul#overview > li > div.pattern .inspector-mask .inspector-highlight > div.label.below {
+  bottom: -20px;
+}
+div#overview-container > ul#overview > li > div.pattern > div.pattern-preview {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
   box-sizing: padding-box;
   width: 320px;
   height: 568px;
   overflow: hidden;
   transition: -webkit-transform 0.2s ease-in;
   transition: transform 0.2s ease-in;
-}
-div#overview-container > ul#overview > li > div.pattern > iframe.inspecting {
   z-index: 8;
+}
+div#overview-container > ul#overview > li > div.pattern > div.pattern-preview.inspecting {
   cursor: pointer;
   transition: -webkit-transform 0.2s ease-out;
   transition: transform 0.2s ease-out;
   -webkit-transform: translateY(-24px);
   transform: translateY(-24px);
+}
+div#overview-container > ul#overview > li > div.pattern > div.pattern-preview.inspecting > .page * {
+  cursor: pointer;
 }
 div#components-container {
   overflow: auto;

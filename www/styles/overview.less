@@ -34,6 +34,7 @@ div#overview-container {
       padding: 0;
       list-style: none;
       display: inline-block;
+      font-size: 16px;
 
       > h3 {
         font-size: 18px;
@@ -55,29 +56,88 @@ div#overview-container {
           right: 0px;
           bottom: 0px;
           background-color: #343536;
-          z-index: 9;
-
+          z-index: 8;
         }
 
         > div.inspector-mask {
+        }
+
+        .inspector-mask {
+          cursor: pointer;
+          z-index: 9;
+          position: absolute;
+          background-color: transparent;
+          top: 0px;
+          left: 0px;
+          bottom: 0px;
+          right: 0px;
+
           &.inspecting {
             transform: translateY(-24px);
           }
+
+          .inspector-highlight {
+            position: absolute;
+            background-color: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff1a33;
+            z-index: 9;
+            display: none;
+            box-sizing: border-box;
+            cursor: pointer;
+
+            > div.label {
+              position: absolute;
+              display: inline-block;
+              font-size: 12px;
+              width: auto;
+              left: -1px;
+              right: -1px;
+              height: 20px;
+              color: white;
+              border: 1px solid #ff1a33;
+              background-color: #ff1a33;
+              font-weight: bold;
+              line-height: 20px;
+              padding: 0 4px;
+              white-space: nowrap;
+              box-sizing: border-box;
+
+              &.inner {
+                bottom: 0px;
+                right: -1px;
+              }
+
+              &.above {
+                top: -20px;
+                right: -1px;
+              }
+
+              &.below {
+                bottom: -20px;
+              }
+            }
+          }
         }
 
-        > iframe {
-          position: relative;
+        > div.pattern-preview {
+          position: absolute;
+          left: 0px;
+          right: 0px;
+          top: 0px;
           box-sizing: padding-box;
           width: 320px;
           height: 568px;
           overflow: hidden;
           transition: transform 0.2s ease-in;
+          z-index: 8;
 
           &.inspecting {
-            z-index: 8;
             cursor: pointer;
             transition: transform 0.2s ease-out;
             transform: translateY(-24px);
+            & > .page * {
+              cursor: pointer;
+            }
           }
         }
       }

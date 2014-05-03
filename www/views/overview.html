@@ -5,13 +5,46 @@
 <div id="overview-container">
   <ul id="overview">
     <li ng-repeat="pattern in patterns" ng-init="pattern.src = 'patterns/' + pattern.name + '.html'">
-    <h3>{{pattern.displayName}} <a ng-click="htmlDialog.show(pattern.src)" style="float:right" translate>T_SHOW_HTML</a></h3>
+    <h3>{{pattern.displayName}} <a ng-click="htmlDialog.show(pattern.src)" style="display: inline-block; margin-top: 4px; float:right; font-size: 13px; opacity: 0.6;" translate>T_SHOW_HTML</a></h3>
       <div class="pattern" ng-class="{inspecting: inspector.isShown}">
+
         <div class="inspector-mask" pattern-inspector ng-show="inspector.isShown" ng-class="{inspecting: inspector.isShown}">
           <div class="inspector-highlight" ng-click="showComponentDialog()"><div class="label"></div></div>
         </div>
-        <div class="pattern-mask" ng-hide="pattern.isLoaded"></div>
-        <iframe ng-src="{{pattern.src}}" ng-class="{inspecting: inspector.isShown}" pattern-iframe pattern-on-load="pattern.isLoaded = true"></iframe>
+
+        <div class="pattern-preview" pattern-element ng-class="{inspecting: inspector.isShown}">
+          <div class="page" class="position: relative; z-index: 0;">
+            <div class="navigation-bar">
+              <div class="navigation-bar__center">
+                <span class="navigation-bar__title">Login</span>
+              </div>
+            </div>
+
+            <div style="width: 90%; margin: 90px auto 0 auto;">
+
+              <div style="padding: 4px">
+                <input type="text" class="text-input--underbar" placeholder="First" value="" style="width: 48%">
+                <input type="text" class="text-input--underbar" placeholder="Last" value="" style="width: 48%">
+              </div>
+
+              <div style="padding: 4px">
+                <input type="text" class="text-input--underbar width-full" placeholder="Email" value="" style="width: 100%">
+              </div>
+              <div style="padding: 4px">
+                <input type="password" class="text-input--underbar width-full" placeholder="Password" value="" style="width: 100%">
+              </div>
+
+              <div style="opacity: 0.6">
+                Password - 6 characters or more
+              </div>
+
+              <div style="padding: 4px">
+                <button class="button--large--cta">Sign up</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </li>
   </ul>

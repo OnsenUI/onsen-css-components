@@ -239,13 +239,46 @@ app.run(["$templateCache", function($templateCache) {
     "<div id=\"overview-container\">\n" +
     "  <ul id=\"overview\">\n" +
     "    <li ng-repeat=\"pattern in patterns\" ng-init=\"pattern.src = 'patterns/' + pattern.name + '.html'\">\n" +
-    "    <h3>{{pattern.displayName}} <a ng-click=\"htmlDialog.show(pattern.src)\" style=\"float:right\" translate>T_SHOW_HTML</a></h3>\n" +
+    "    <h3>{{pattern.displayName}} <a ng-click=\"htmlDialog.show(pattern.src)\" style=\"display: inline-block; margin-top: 4px; float:right; font-size: 13px; opacity: 0.6;\" translate>T_SHOW_HTML</a></h3>\n" +
     "      <div class=\"pattern\" ng-class=\"{inspecting: inspector.isShown}\">\n" +
+    "\n" +
     "        <div class=\"inspector-mask\" pattern-inspector ng-show=\"inspector.isShown\" ng-class=\"{inspecting: inspector.isShown}\">\n" +
     "          <div class=\"inspector-highlight\" ng-click=\"showComponentDialog()\"><div class=\"label\"></div></div>\n" +
     "        </div>\n" +
-    "        <div class=\"pattern-mask\" ng-hide=\"pattern.isLoaded\"></div>\n" +
-    "        <iframe ng-src=\"{{pattern.src}}\" ng-class=\"{inspecting: inspector.isShown}\" pattern-iframe pattern-on-load=\"pattern.isLoaded = true\"></iframe>\n" +
+    "\n" +
+    "        <div class=\"pattern-preview\" pattern-element ng-class=\"{inspecting: inspector.isShown}\">\n" +
+    "          <div class=\"page\" class=\"position: relative; z-index: 0;\">\n" +
+    "            <div class=\"navigation-bar\">\n" +
+    "              <div class=\"navigation-bar__center\">\n" +
+    "                <span class=\"navigation-bar__title\">Login</span>\n" +
+    "              </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div style=\"width: 90%; margin: 90px auto 0 auto;\">\n" +
+    "\n" +
+    "              <div style=\"padding: 4px\">\n" +
+    "                <input type=\"text\" class=\"text-input--underbar\" placeholder=\"First\" value=\"\" style=\"width: 48%\">\n" +
+    "                <input type=\"text\" class=\"text-input--underbar\" placeholder=\"Last\" value=\"\" style=\"width: 48%\">\n" +
+    "              </div>\n" +
+    "\n" +
+    "              <div style=\"padding: 4px\">\n" +
+    "                <input type=\"text\" class=\"text-input--underbar width-full\" placeholder=\"Email\" value=\"\" style=\"width: 100%\">\n" +
+    "              </div>\n" +
+    "              <div style=\"padding: 4px\">\n" +
+    "                <input type=\"password\" class=\"text-input--underbar width-full\" placeholder=\"Password\" value=\"\" style=\"width: 100%\">\n" +
+    "              </div>\n" +
+    "\n" +
+    "              <div style=\"opacity: 0.6\">\n" +
+    "                Password - 6 characters or more\n" +
+    "              </div>\n" +
+    "\n" +
+    "              <div style=\"padding: 4px\">\n" +
+    "                <button class=\"button--large--cta\">Sign up</button>\n" +
+    "              </div>\n" +
+    "            </div>\n" +
+    "          </div>\n" +
+    "        </div>\n" +
+    "\n" +
     "      </div>\n" +
     "    </li>\n" +
     "  </ul>\n" +
